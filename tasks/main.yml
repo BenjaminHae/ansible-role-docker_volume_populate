@@ -38,4 +38,4 @@
   docker_container:
     name: "{{ item }}"
     state: started
-  loop: "{{ start_containers_after | stop_containers_before }}"
+  loop: "{{ start_containers_after | default(stop_containers_before) }}"
