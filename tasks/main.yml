@@ -23,11 +23,12 @@
   when: purge_existing
 
 - name: copy data to volume
+  docker_container:
     image: "{{ image }}"
     purge_networks: true
     auto_remove: true
     detach: false
-    command: "{{ docker_command }}"
+    command: "/bin/sh -c \\"{{ docker_command }}\\""
     volumes:
       - "{{ volume_name }}:/dest:rw"
       - "{{ src_mount }}"
