@@ -20,7 +20,6 @@ vars:
 
 ## Parameters
 
-|--------------------------|--------------------------------------|------------------------------------------------------------------------|
 | name                     | default                              | description                                                            |
 |--------------------------|--------------------------------------|------------------------------------------------------------------------|
 | `stop_containers_before` | `[]`                                 | Names of containers that should be stopped before copying              |
@@ -31,4 +30,3 @@ vars:
 | `purge_existing`         | `false`                              | Delete all existing content in destination volume                      |
 | `path`                   |                                      | Path of source directory or archive (tar.gz), or name of source volume |
 | `volume_name`            |                                      | Name of destination volume                                             |
-|--------------------------|--------------------------------------|------------------------------------------------------------------------|
