@@ -1,0 +1,13 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: docker-volume-populate
+  author: benjaminhae
+  description: Populate a docker volume
+  company: ""
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.4
+  galaxy_tags:
+    - containers
+    - docker

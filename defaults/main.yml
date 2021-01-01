@@ -1,0 +1,15 @@
+---
+stop_containers_before: []
+# start_containers_after is undefined by default and falls back to stop_containers_before, if you don't want any containers to start after, set it to []
+
+image: "busybox:latest"
+
+# type of source, one of "archive", "directory", "volume"
+type: "directory"
+# one of "in", "out" (not implemented yet)
+direction: "in"
+# only relevant for "in"
+purge_existing: false
+    
+# path: path of source, directory or archive (tar.gz)
+# volume_name: volume to mount

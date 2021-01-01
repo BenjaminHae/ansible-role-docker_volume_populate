@@ -1,0 +1,33 @@
+---
+- name: stop containers
+  docker_container:
+    name: "{{ item }}"
+    state: stopped
+  loop: "{{ stop_containers_before }}"
+
+- name: set parameters (directory, volume)
+  set_fact:
+    docker_command: "cp -r /src /dest"
+    src_mount: "{{ path }}:/src:ro"
+  when: type == 'directory' || type == 'volume'
+
+- name: set parameters (archive)
+  set_fact:
+    docker_command: "tar xf /src/archive -C /dest"
+    src_mount: "{{ path }}:/src/archive:ro"
+  when: type == 'archive'
+
+- name: copy data to volume
+    image: "{{ image }}"
+    purge_networks: true
+    auto_remove: true
+    detach: false
+    command:
+    volumes:
+      - "{{ volume_name }}:/dest:rw"
+
+- name: start containers
+  docker_container:
+    name: "{{ item }}"
+    state: started
+  loop: "{{ start_containers_after | stop_containers_before }}"
