@@ -17,14 +17,20 @@
     src_mount: "{{ path }}:/src/archive:ro"
   when: type == 'archive'
 
+- name: set parameters (purge_existing)
+  set_fact:
+    docker_command: "rm -rf /dest/* && {{ docker_command }}"
+  when: purge_existing
+
 - name: copy data to volume
     image: "{{ image }}"
     purge_networks: true
     auto_remove: true
     detach: false
-    command:
+    command: "{{ docker_command }}"
     volumes:
       - "{{ volume_name }}:/dest:rw"
+      - "{{ src_mount }}"
 
 - name: start containers
   docker_container:
