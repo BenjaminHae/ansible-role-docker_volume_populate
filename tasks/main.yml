@@ -28,7 +28,7 @@
     purge_networks: true
     auto_remove: true
     detach: false
-    command: "/bin/sh -c \\"{{ docker_command }}\\""
+    command: "/bin/sh -c \"{{ docker_command }}\""
     volumes:
       - "{{ volume_name }}:/dest:rw"
       - "{{ src_mount }}"
