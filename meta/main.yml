@@ -2,7 +2,7 @@
 dependencies: []
 
 galaxy_info:
-  role_name: docker-volume-populate
+  role_name: docker_volume_populate
   author: benjaminhae
   description: Populate a docker volume
   company: ""
