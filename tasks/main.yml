@@ -9,7 +9,7 @@
   set_fact:
     docker_command: "cp -r /src /dest"
     src_mount: "{{ path }}:/src:ro"
-  when: type == 'directory' || type == 'volume'
+  when: type == 'directory' or type == 'volume'
 
 - name: set parameters (archive)
   set_fact:
