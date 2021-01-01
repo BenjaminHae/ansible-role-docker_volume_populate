@@ -13,8 +13,8 @@
 
 - name: set parameters (archive)
   set_fact:
-    docker_command: "tar xf /src/archive -C /dest"
-    src_mount: "{{ path }}:/src/archive:ro"
+    docker_command: "tar xf /src -C /dest"
+    src_mount: "{{ path }}:/src:ro"
   when: type == 'archive'
 
 - name: set parameters (purge_existing)
