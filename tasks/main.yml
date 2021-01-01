@@ -24,6 +24,7 @@
 
 - name: copy data to volume
   docker_container:
+    name: "{{ container_name }}"
     image: "{{ image }}"
     purge_networks: true
     auto_remove: true
