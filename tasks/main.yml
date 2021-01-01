@@ -7,7 +7,7 @@
 
 - name: set parameters (directory, volume)
   set_fact:
-    docker_command: "cp -r /src /dest"
+    docker_command: "cp -r /src/ /dest"
     src_mount: "{{ path }}:/src:ro"
   when: type == 'directory' or type == 'volume'
 
