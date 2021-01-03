@@ -1,0 +1,22 @@
+---
+- name: set src_mount
+  set_fact:
+    src_mount: "{{ volume_name }}"
+
+- name: set parameters (directory, volume)
+  set_fact:
+    docker_command: "cp -a /src/. /dest"
+    dest_mount: "{{ dest }}"
+  when: type == 'directory' or type == 'volume'
+
+- name: set parameters (archive)
+  set_fact:
+    docker_command: "cd /src && tar -czf /dest/{{ dest | basename }} ."
+    dest_mount: "{{ dest | dirname }}"
+  when: type == 'archive'
+
+- name: set parameters (purge_existing)
+  set_fact:
+    docker_command: "find /dest -exec rm -rf '{}' \\; && {{ docker_command }}"
+  when: purge_existing and type != 'archive'
+

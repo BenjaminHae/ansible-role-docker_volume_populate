@@ -5,24 +5,13 @@
     state: stopped
   loop: "{{ stop_containers_before }}"
 
-- name: set parameters (directory, volume)
-  set_fact:
-    docker_command: "cp -a /src/. /dest"
-    src_mount: "{{ path }}:/src:ro"
-  when: type == 'directory' or type == 'volume'
+- include_tasks: in_to_volume.yml
+  when: direction == "in"
 
-- name: set parameters (archive)
-  set_fact:
-    docker_command: "tar xf /src -C /dest"
-    src_mount: "{{ path }}:/src:ro"
-  when: type == 'archive'
+- include_tasks: out_of_volume.yml
+  when: direction == "out"
 
-- name: set parameters (purge_existing)
-  set_fact:
-    docker_command: "find /dest -exec rm -rf '{}' \\; && {{ docker_command }}"
-  when: purge_existing
-
-- name: copy data to volume
+- name: copy data
   docker_container:
     name: "{{ container_name }}"
     image: "{{ image }}"
@@ -31,8 +20,8 @@
     detach: false
     command: "/bin/sh -c \"{{ docker_command }}\""
     volumes:
-      - "{{ volume_name }}:/dest:rw"
-      - "{{ src_mount }}"
+      - "{{ src_mount }}:/src:ro"
+      - "{{ dest_mount }}:/dest:rw"
 
 - name: start containers
   docker_container:
