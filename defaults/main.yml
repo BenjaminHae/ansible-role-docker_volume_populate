@@ -7,10 +7,12 @@ container_name: "ansible-copy-volumes-container"
 
 # type of source, one of "archive", "directory", "volume"
 type: "directory"
-# one of "in", "out" (not implemented yet)
+# one of "in", "out"
 direction: "in"
 # only relevant for "in"
 purge_existing: false
     
-# path: path of source, directory or archive (tar.gz)
-# volume_name: volume to mount
+# src: path of source, directory or archive (tar.gz) (only for direction="in")
+# dest: path of destination directory, volume or archive (tar.gz) (only for direction="out")
+# volume_name: volume to mount (for writign to, or reading from)
+# owner: name of owner to set for direction="in"
