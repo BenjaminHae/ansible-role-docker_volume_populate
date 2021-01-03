@@ -4,7 +4,7 @@ dependencies: []
 galaxy_info:
   role_name: docker_volume_populate
   author: benjaminhae
-  description: Populate a docker volume
+  description: Populate a docker volume, or write contents of volume to another place
   company: ""
   license: "license (BSD, MIT)"
   min_ansible_version: 2.4
