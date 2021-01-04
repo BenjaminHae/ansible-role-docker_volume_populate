@@ -22,4 +22,4 @@
 - name: set parameters (owner)
   set_fact:
     docker_command: "{{ docker_command }} && chown -R {{ owner }} /dest"
-  when: owner
+  when: owner is defined
