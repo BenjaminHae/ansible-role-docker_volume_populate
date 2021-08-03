@@ -2,6 +2,17 @@
 - name: set src_mount
   set_fact:
     src_mount: "{{ volume_name }}"
+    src_mount_type: "volume"
+
+- name: set parameters dest_mount_type
+  set_fact:
+    dest_mount_type: "bind"
+  when: type == 'directory' or type == 'archive'
+
+- name: set parameters dest_mount_type
+  set_fact:
+    dest_mount_type: "volume"
+  when: type == 'volume'
 
 - name: set parameters (directory, volume)
   set_fact:

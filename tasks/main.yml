@@ -18,11 +18,15 @@
     purge_networks: true
     cleanup: true
     detach: false
-    command: "/bin/sh -c \"{{ docker_command }}\""
-    volumes:
-      - "{{ src_mount }}:/src:ro"
-      - "{{ dest_mount }}:/dest:rw"
-
+    command: "/bin/sh -c \"ls -la / && {{ docker_command }}\""
+    mounts:
+      - read_only: true
+        source: "{{ src_mount }}"
+        target: "/src"
+        type: "{{ src_mount_type }}"
+      - source: "{{ dest_mount }}"
+        target: "/dest"
+        type: "{{ dest_mount_type }}"
 - name: start containers
   docker_container:
     name: "{{ item }}"
