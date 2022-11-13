@@ -1,9 +1,11 @@
 ---
 - name: stop containers
   docker_container:
-    name: "{{ item }}"
+    name: "{{ stop_item }}"
     state: stopped
   loop: "{{ stop_containers_before }}"
+  loop_control:
+      loop_var: stop_item
 
 - include_tasks: in_to_volume.yml
   when: direction == "in"
@@ -29,6 +31,8 @@
         type: "{{ dest_mount_type }}"
 - name: start containers
   docker_container:
-    name: "{{ item }}"
+    name: "{{ start_item }}"
     state: started
   loop: "{{ start_containers_after | default(stop_containers_before) }}"
+  loop_control:
+      loop_var: start_item
